@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"rel="stylesheet"/>
+    <title>Blog Tutorial</title>
+</head>
+<body>
+  <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-lg">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">Personal Blog</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarText"
+                aria-controls="navbarText"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    </ul>
+                    {% if not request.user.is_authenticated  %}
+                    <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-success m-2">Register</a>
+                    {% else %}
+                    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    <a href="{% url 'show_all_blogs' %}" class="btn btn-success m-2">Show Blogs</a>
+                    {% endif %}
+              </div>
+            </div>
+        </nav>
+        {% block start %}
+
+        {% endblock %}
+    </div>
+    <!-- MDB -->
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+</body>
+</html>

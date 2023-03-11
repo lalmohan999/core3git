@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+    <div class="container mt-3">
+        <div class="row">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+                {% endfor %}
+              {% endif %}
+                <!-- Select Category -->
+                <div class="mb-4">
+                  <label class="form-label" for="form1Example1">Select Category</label>
+                  <select class="form-control" name="category">
+                    <option>Choose</option>
+                    {% for category in categories %}
+                    <option value="{{category.id}}" {% if blog_obj.category == category %} selected {% endif %}>{{category.category_name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <!-- Title input -->
+                <div class="form-outline mb-4">
+                  <input type="text" name="title" id="form1Example1" value="{{blog_obj.title}}" class="form-control" />
+                  <label class="form-label" for="form1Example1">Enter Title</label>
+                </div>
+              
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  {{form.media}}
+                  {{form.as_p}}
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary">Update Blog</button>
+                <br>
+                <label class="form-label mt-3" for="customFile">Upload Banner Image</label>
+                <input type="file" name="banner_image" class="form-control" id="customFile" />
+              </form>
+        </div>
+    </div>
+
+{% endblock %}
